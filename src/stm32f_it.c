@@ -1,14 +1,14 @@
-/**
+/** 
   ******************************************************************************
-  * @file    UART/UART_Printf/Src/stm32f4xx_it.c 
+  * @file    Examples_LL/USART/USART_Communication_Tx/Src/stm32f3xx_it.c
   * @author  MCD Application Team
   * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
+  *          This file provides template for all exceptions handler and
   *          peripherals interrupt service routine.
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2017 STMicroelectronics.
+  * Copyright (c) 2016 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -20,13 +20,13 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "stm32f4xx_it.h"    
+#include "stm32f_it.h"
 
-/** @addtogroup STM32F4xx_HAL_Examples
+/** @addtogroup STM32F3xx_LL_Examples
   * @{
   */
 
-/** @addtogroup UART_Printf
+/** @addtogroup USART_Communication_Tx
   * @{
   */
 
@@ -34,6 +34,7 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -48,6 +49,7 @@
   */
 void NMI_Handler(void)
 {
+
 }
 
 /**
@@ -60,6 +62,8 @@ void HardFault_Handler(void)
   /* Go to infinite loop when Hard Fault exception occurs */
   while (1)
   {
+    HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_PIN);
+    HAL_Delay(250);
   }
 }
 
@@ -73,6 +77,8 @@ void MemManage_Handler(void)
   /* Go to infinite loop when Memory Manage exception occurs */
   while (1)
   {
+    HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_PIN);
+    HAL_Delay(250);
   }
 }
 
@@ -86,6 +92,8 @@ void BusFault_Handler(void)
   /* Go to infinite loop when Bus Fault exception occurs */
   while (1)
   {
+    HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_PIN);
+    HAL_Delay(250);
   }
 }
 
@@ -99,6 +107,8 @@ void UsageFault_Handler(void)
   /* Go to infinite loop when Usage Fault exception occurs */
   while (1)
   {
+    HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_PIN);
+    HAL_Delay(250);
   }
 }
 
@@ -136,27 +146,37 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
+  HAL_IncTick();
 }
 
 /******************************************************************************/
-/*                 STM32F4xx Peripherals Interrupt Handlers                   */
-/*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
+/*                 STM32F3xx Peripherals Interrupt Handlers                   */
+/*  Add here the Interrupt Handler for the used peripheral(s), for the        */
 /*  available peripheral interrupt handler's name please refer to the startup */
-/*  file (startup_stm32f4xx.s).                                               */
+/*  file (startup_stm32f3xx.s).                                               */
 /******************************************************************************/
+
 /**
-  * @brief  This function handles PPP interrupt request.
+  * @brief  This function handles external line 15_10 interrupt request.
   * @param  None
   * @retval None
   */
-/*void PPP_IRQHandler(void)
+void USER_BUTTON_IRQHANDLER(void)
 {
-}*/
+  /* Manage Flags */
+  if(LL_EXTI_IsActiveFlag_0_31(USER_BUTTON_EXTI_LINE) != RESET)
+  {
+    /* Clear EXTI flag */
+    LL_EXTI_ClearFlag_0_31(USER_BUTTON_EXTI_LINE);
 
+    /* Handle user button press in dedicated function */
+    UserButton_Callback(); 
+  }
+}
 
 /**
   * @}
-  */ 
+  */
 
 /**
   * @}

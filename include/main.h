@@ -32,6 +32,7 @@
 #include "stm32f3xx_ll_exti.h"
 #elif F4
 #include "stm32f4xx_hal.h"
+#include "stm32f4xx_ll_exti.h"
 #elif F7
 #include "stm32f7xx_hal.h"
 #elif L0
@@ -47,6 +48,13 @@
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
+/* Definition for LED */
+#define LED_PIN                                GPIO_PIN_13
+#define LED_GPIO_PORT                          GPIOC
+#define LED_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOC_CLK_ENABLE()
+#define COM_PORT_DEBUG 
+
+
 /* User can use this section to tailor USARTx/UARTx instance used and associated 
    resources */
 /* Definition for USARTx clock resources */

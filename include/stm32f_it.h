@@ -1,6 +1,6 @@
 /**
   ******************************************************************************
-  * @file    UART/UART_Printf/Inc/stm32f4xx_it.h 
+  * @file    UART/UART_Printf/Inc/stm32f4xx_it.h and f3xx
   * @author  MCD Application Team
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
@@ -17,8 +17,8 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F4xx_IT_H
-#define __STM32F4xx_IT_H
+#ifndef __STM32F_IT_H
+#define __STM32F_IT_H
 
 #ifdef __cplusplus
  extern "C" {
@@ -39,8 +39,9 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
+void USER_BUTTON_IRQHANDLER(void);
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __STM32F4xx_IT_H */
+#endif /* __STM32F_IT_H */

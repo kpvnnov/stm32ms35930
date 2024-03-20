@@ -6,10 +6,6 @@
 #include <stdio.h>
 
 
-#define LED_PIN                                GPIO_PIN_13
-#define LED_GPIO_PORT                          GPIOC
-#define LED_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOC_CLK_ENABLE()
-#define COM_PORT_DEBUG 
 
 #ifdef COM_PORT_DEBUG
 UART_HandleTypeDef UartHandle;
@@ -64,8 +60,8 @@ int main(void)
     Error_Handler(); 
   }
   #endif
-HAL_Delay(1000);
-    printf("How do you like this, Elon Musk? \n\r");
+  HAL_Delay(1000);
+  printf("How do you like this, Elon Musk? \n\r");
 
   while (1)
   {
